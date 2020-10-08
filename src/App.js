@@ -14,7 +14,13 @@ const App = () => {
       <header className="App-header">
         Rich Text Editor Example
       </header>
-      <Editor editorState={editorState} onChange={setEditorState} />
+      <Editor
+        editorState={editorState}
+        onEditorStateChange={setEditorState}
+        wrapperClassName="wrapper-class"
+        editorClassName="editor-class"
+        toolbarClassName="toolbar-class"
+      />
     </div>
   )
 }
