@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertToHTML } from 'draft-convert';
+import DOMPurify from 'dompurify';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './App.css';
 
@@ -21,6 +22,12 @@ const App = () => {
     setConvertedContent(currentContentAsHTML);
   }
 
+  const createMarkup = (html) => {
+    return  {
+      __html: DOMPurify.sanitize(html)
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -33,6 +40,7 @@ const App = () => {
         editorClassName="editor-class"
         toolbarClassName="toolbar-class"
       />
+      <div className="preview" dangerouslySetInnerHTML={createMarkup(convertedContent)}></div>
     </div>
   )
 }
